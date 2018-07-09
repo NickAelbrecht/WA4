@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-club.component.css']
 })
 export class AddClubComponent implements OnInit {
+  naam:string;
+  prijs:number;
+  locatie:string;
+  categorie:string;
 
   constructor() { }
 
   ngOnInit() {
   }
-
+  addClub(newclubname:HTMLInputElement){
+    console.log(newclubname.value);
+  return false;
+  }
 }

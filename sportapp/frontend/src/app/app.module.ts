@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
-import { ClubComponent } from './club/club.component';
+import { ClubComponent } from './club/club/club.component';
 import { AddClubComponent } from './club/add-club/add-club.component';
 import { ClubListComponent } from './club/club-list/club-list.component';
 import { SportComponent } from './club/sport/sport.component';
