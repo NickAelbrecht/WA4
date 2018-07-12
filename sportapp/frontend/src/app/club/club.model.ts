@@ -11,6 +11,15 @@ export class Club {
   get naam(): string {
     return this._naam;
   }
+  get locatie(): string {
+    return this._locatie;
+  }
+  get prijs(): number {
+    return this._prijs;
+  }
+  get sporten(): string[] {
+    return this._sporten;
+  }
 
   addSport(naam: string) {
     this._sporten.push(naam);

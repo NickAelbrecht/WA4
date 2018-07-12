@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { ClubListComponent } from './club/club-list/club-list.component';
 import { SportComponent } from './club/sport/sport.component';
 import { ClubDetailComponent } from './club/club-detail/club-detail.component';
 import { HomepaginaComponent } from './club/homepagina/homepagina.component';
+import { ClubFilterPipe } from './club/club-filter.pipe';
 
 
 @NgModule({
@@ -19,10 +21,12 @@ import { HomepaginaComponent } from './club/homepagina/homepagina.component';
     ClubListComponent,
     SportComponent,
     ClubDetailComponent,
-    HomepaginaComponent
+    HomepaginaComponent,
+    ClubFilterPipe
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

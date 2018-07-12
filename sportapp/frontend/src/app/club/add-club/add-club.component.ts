@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Club } from "./../club.model";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-add-club',
-  templateUrl: './add-club.component.html',
-  styleUrls: ['./add-club.component.css']
+  selector: "app-add-club",
+  templateUrl: "./add-club.component.html",
+  styleUrls: ["./add-club.component.css"]
 })
 export class AddClubComponent implements OnInit {
-  naam:string;
-  prijs:number;
-  locatie:string;
-  categorie:string;
+  @Output() public newClub = new EventEmitter<Club>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-  addClub(newclubname:HTMLInputElement){
-    console.log(newclubname.value);
-  return false;
+  ngOnInit() {}
+  addClub(newclubname: HTMLInputElement): boolean {
+    const club = new Club(newclubname.value);
+    this.newClub.emit(club);
+    return false;
   }
 }
