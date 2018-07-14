@@ -2,7 +2,8 @@ var mongoose = require("mongoose");
 
 var ClubSchema = new mongoose.Schema({
   naam: String,
-  sporten: [String],
+  sporten: [{type: mongoose.Schema.Types.ObjectId, 
+    ref: 'Sport'}],
   prijs: Number,
   locatie: String
 });

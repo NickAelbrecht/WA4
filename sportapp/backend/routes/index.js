@@ -10,7 +10,8 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/API/clubs/", function(req, res, next) {
-  Club.find(function(err, clubs) {
+  let query = Club.find().populate("sporten");
+  query.exec(function(err, clubs) {
     if (err) {
       return next(err);
     }
@@ -19,12 +20,33 @@ router.get("/API/clubs/", function(req, res, next) {
 });
 
 router.post("/API/clubs/", function(req, res, next) {
-  let club = new Club(req.body);
-  club.save(function(err, rec) {
+  Sport.create(req.body.sporten, function(err, sp) {
     if (err) {
       return next(err);
     }
-    res.json(rec);
+    let club = new Club({ naam: req.body.naam });
+    club.sporten = sp;
+    club.save(function(err, rec) {
+      if (err) {
+        Sport.remove({ _id: { $in: club.sporten } });
+        return next(err);
+      }
+      res.json(club);
+    });
+  });
+});
+
+router.post("/API/club/:club/sporten", function(req, res, next) {
+  let sp = new Sport(req.body);
+
+  sp.save(function(err, sport) {
+    if (err) return next(err);
+
+    req.club.sporten.push(sport);
+    req.club.save(function(err, rec) {
+      if (err) return next(err);
+      res.json(sport);
+    });
   });
 });
 
@@ -32,21 +54,30 @@ router.get("/API/club/:club", function(req, res, next) {
   res.json(req.club);
 });
 
-router.param('club', function(req, res, next, id) {
+router.param("club", function(req, res, next, id) {
   let query = Club.findById(id);
-  query.exec(function (err, club){
-    if (err) { return next(err); }
-    if (!club) { return next(new Error('not found ' + id)); }
+  query.exec(function(err, club) {
+    if (err) {
+      return next(err);
+    }
+    if (!club) {
+      return next(new Error("not found " + id));
+    }
     req.club = club;
     return next();
   });
-}); 
+});
 
-router.delete('/API/club/:club', function(req, res, next) {
-  req.club.remove(function(err) {
-    if (err) { return next(err); }   
-    res.json("removed club");
+router.delete("/API/club/:club", function(req, res, next) {
+  Sport.remove({ _id: { $in: req.club.sporten } }, function(err) {
+    if (err) return next(err);
+    req.club.remove(function(err) {
+      if (err) {
+        return next(err);
+      }
+      res.json(req.club);
+    });
   });
-})
+});
 
 module.exports = router;

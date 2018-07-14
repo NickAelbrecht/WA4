@@ -3,11 +3,12 @@ import { Club } from "./club.model";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 import { map } from "rxjs/operators";
+import { Sport } from "./sport/sport.model";
 
 @Injectable()
 export class ClubDataService {
   private _clubs = new Array<Club>();
-  private readonly _appUrl = "/API/clubs/";
+  private readonly _appUrl = "/API/";
 
   constructor(private http: HttpClient) {
     let club1 = new Club("test");
@@ -25,5 +26,10 @@ export class ClubDataService {
     return this.http
       .post(this._appUrl, club)
       .pipe(map((item: any): Club => new Club(item.naam)));
+  }
+
+  addSportToClub(sp: Sport, cl: Club): Observable<Sport> {
+    const theUrl = `${this._appUrl}/club/${cl.id}/sporten`;
+    return this.http.post(theUrl, sp).pipe(map(Sport.fromJSON));
   }
 }

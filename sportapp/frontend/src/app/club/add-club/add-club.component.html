@@ -1,11 +1,23 @@
-<div class="ui large form segment">
-  <h3 class="ui header">Add club</h3>
+<form class="ui form" [formGroup]='club' (ngSubmit)='onSubmit()'>
+  <h4 class="ui dividing header">Voeg een club toe!</h4>
   <div class="field">
-    <label for="naam">Naam:</label> 
-    <input id="naam" name="naam" #newclubname>
+    <label for='name_id'>naam:</label>
+    <input type='text' id='name_id' formControlName='naam'>
   </div>
-  <button (click)="addClub(newclubname)"
-  	    class="ui positive right floated button">
-    add club 
-  </button>
-</div>
+  <div *ngIf='club.get("naam").errors?.required && club.get("naam").touched' class='ui pointing red basic label'>
+    error! this is required
+  </div>
+
+  <div formArrayName='sporten' *ngFor='let item of club.get("sporten").controls; 
+  let i = index'>
+    <div [formGroupName]='i'>
+      <div>
+        <label for="sport_naam">Sport:</label>
+        <div>
+          <input type="text" id="sport_naam" formControlName='sportnaam'>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type='submit' class="ui positive right button">add</button>
+</form>

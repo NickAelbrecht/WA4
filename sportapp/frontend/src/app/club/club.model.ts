@@ -1,11 +1,15 @@
+import { Sport } from "./sport/sport.model";
+
 export class Club {
   private _naam: string;
   private _locatie: string;
   private _prijs: number;
-  private _sporten = new Array<string>();
+  private _sporten: Sport[];
+   id: Number;
 
-  constructor(naam: string) {
+  constructor(naam: string, sporten?: Sport[]) {
     this._naam = naam;
+    this._sporten = sporten || new Array();
   }
 
   get naam(): string {
@@ -17,11 +21,11 @@ export class Club {
   get prijs(): number {
     return this._prijs;
   }
-  get sporten(): string[] {
+  get sporten(): Sport[] {
     return this._sporten;
   }
 
-  addSport(naam: string) {
-    this._sporten.push(naam);
+  addSport(sp: Sport) {
+    this._sporten.push(sp);
   }
 }
