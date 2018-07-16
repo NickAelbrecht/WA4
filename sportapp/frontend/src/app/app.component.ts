@@ -7,12 +7,12 @@ import { Observable } from "rxjs/Observable";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  providers: [ClubDataService]
+  //providers: [ClubDataService]
 })
-export class AppComponent implements OnInit {
+export class AppComponent {//implements OnInit {
   title = "app";
 
-  private _clubs: Club[];
+ /*private _clubs: Club[];
   public filterClubName: string;
 
   applyFilter(filter: string) {
@@ -33,5 +33,5 @@ export class AppComponent implements OnInit {
     this._clubDataService
       .addNewClub(club)
       .subscribe(item => this._clubs.push(item));
-  }
+  }*/
 }

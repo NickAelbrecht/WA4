@@ -9,6 +9,8 @@ import {
 } from "@angular/forms";
 import { Sport } from "../sport/sport.model";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { ClubDataService } from "../club-data.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-add-club",
@@ -19,8 +21,9 @@ export class AddClubComponent implements OnInit {
   @Output() public newClub = new EventEmitter<Club>();
 
   private club: FormGroup;
+  public errorMsg: string;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private _clubDataService:ClubDataService) {}
 
   ngOnInit() {
     this.club = this.fb.group({
@@ -57,7 +60,14 @@ export class AddClubComponent implements OnInit {
       }
     }
 
-    this.newClub.emit(club);
+    //this.newClub.emit(club);
+    this._clubDataService.addNewClub(club).subscribe(
+      () => {},
+      (error: HttpErrorResponse) => {
+        this.errorMsg = `Error ${error.status} while adding
+          recipe for ${club.naam}: ${error.error}`;
+      }
+    );
   }
 
   /*addClub(newclubname: HTMLInputElement): boolean {

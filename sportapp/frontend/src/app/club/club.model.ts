@@ -5,7 +5,7 @@ export class Club {
   private _locatie: string;
   private _prijs: number;
   private _sporten: Sport[];
-   id: Number;
+  _id: string;
 
   constructor(naam: string, sporten?: Sport[]) {
     this._naam = naam;
@@ -27,5 +27,24 @@ export class Club {
 
   addSport(sp: Sport) {
     this._sporten.push(sp);
+  }
+
+  static fromJSON(json: any): Club {
+    const cl = new Club(json.naam, json.sporten.map(Sport.fromJSON));
+    cl._id = json._id;
+
+    return cl;
+  }
+
+  toJSON() {
+    return {
+      _id: this._id,
+      naam: this._naam,
+      sporten: this._sporten.map(sp => sp.toJSON())
+    };
+  }
+
+  get id(): string {
+    return this._id;
   }
 }

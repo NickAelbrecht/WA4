@@ -1,3 +1,9 @@
-<p>Welkom bij de sportapp</p>
-<app-club></app-club>
-
+<div class="ui container">
+    <div class="ui two item menu">
+      <a class='item' routerLinkActive='active' 
+        routerLink="/club-list" >Clubs</a>
+      <a class='item' routerLinkActive='active' 
+        routerLink="/add-club" >Add club</a>
+    </div>
+    <router-outlet></router-outlet>
+  </div>

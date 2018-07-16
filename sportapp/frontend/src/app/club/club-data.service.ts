@@ -11,8 +11,8 @@ export class ClubDataService {
   private readonly _appUrl = "/API/";
 
   constructor(private http: HttpClient) {
-    let club1 = new Club("test");
-    this._clubs.push(club1);
+   /* let club1 = new Club("test");
+    this._clubs.push(club1);*/
   }
   get clubs(): Observable<Club[]> {
     return this.http
@@ -31,5 +31,11 @@ export class ClubDataService {
   addSportToClub(sp: Sport, cl: Club): Observable<Sport> {
     const theUrl = `${this._appUrl}/club/${cl.id}/sporten`;
     return this.http.post(theUrl, sp).pipe(map(Sport.fromJSON));
+  }
+
+  getClub(id: string): Observable<Club> {
+    return this.http
+      .get(`${this._appUrl}/club/${id}`)
+      .pipe(map(Club.fromJSON));
   }
 }
