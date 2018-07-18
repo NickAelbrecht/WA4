@@ -1,4 +1,4 @@
-import { Club } from "./../club.model";
+import { Club } from "../club.model";
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 import {
   FormGroup,
@@ -18,12 +18,19 @@ import { HttpErrorResponse } from "@angular/common/http";
   styleUrls: ["./add-club.component.css"]
 })
 export class AddClubComponent implements OnInit {
-  @Output() public newClub = new EventEmitter<Club>();
+  //@Output() public newClub = new EventEmitter<Club>();
 
   private club: FormGroup;
   public errorMsg: string;
 
-  constructor(private fb: FormBuilder, private _clubDataService:ClubDataService) {}
+  constructor(
+    private fb: FormBuilder,
+    private _clubDataService: ClubDataService
+  ) {}
+
+  get sporten(): FormArray {
+    return <FormArray>this.club.get("sporten");
+  }
 
   ngOnInit() {
     this.club = this.fb.group({
@@ -39,6 +46,15 @@ export class AddClubComponent implements OnInit {
         const lastElement = spLijst[spLijst.length - 1];
         if (lastElement.sportnaam && lastElement.sportnaam.length > 2) {
           this.sporten.push(this.createSporten());
+        } else if (spLijst.length >= 2) {
+          const secondToLast = spLijst[spLijst.length - 2];
+          if (
+            !lastElement.sportnaam(
+              !secondToLast.sportnaam || secondToLast.sportnaam.length < 2
+            )
+          ) {
+            this.sporten.removeAt(this.sporten.length - 1);
+          }
         }
       });
   }
@@ -47,9 +63,6 @@ export class AddClubComponent implements OnInit {
     return this.fb.group({
       sportnaam: ["", [Validators.required, Validators.minLength(3)]]
     });
-  }
-  get sporten(): FormArray {
-    return <FormArray>this.club.get("sporten");
   }
 
   onSubmit() {

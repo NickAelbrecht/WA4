@@ -11,13 +11,22 @@ import { CommonModule } from "@angular/common";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ClubDataService } from "./club-data.service";
 import { RouterModule } from "@angular/router";
+import { ClubResolver } from "./club-resolver";
 
-const routes = [
+/*const routes = [
   { path: "club-list", component: ClubListComponent },
   { path: "add-club", component: AddClubComponent },
-  { path: 'club-detail/:id', component: ClubDetailComponent}
+  { path: 'club-detail/:id', component: ClubDetailComponent, resolve : {club: ClubResolver}}
+];*/
+const routes = [
+  { path: 'list', component: ClubListComponent },
+  { path: 'add', component: AddClubComponent },
+  {
+    path: ':id',
+    component: ClubDetailComponent,
+    resolve: { club: ClubResolver }
+  }
 ];
-
 
 @NgModule({
   imports: [
@@ -35,6 +44,6 @@ const routes = [
     HomepaginaComponent,
     ClubDetailComponent
   ],
-  providers: [ClubDataService]
+  providers: [ClubDataService, ClubResolver]
 })
 export class ClubModule {}

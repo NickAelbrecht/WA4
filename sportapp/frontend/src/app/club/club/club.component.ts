@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Club } from "../club.model";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-club",
@@ -6,18 +7,24 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./club.component.css"]
 })
 export class ClubComponent implements OnInit {
-  naam: string;
+  /*naam: string;
   prijs: number;
   locatie: string;
   categorie: string;
-  sporten: string[];
+  sporten: string[];*/
+  @Input() public club: Club;
+  @Output() public deleteClub = new EventEmitter<Club>();
   constructor() {
-    this.categorie = "balsport";
+    /* this.categorie = "balsport";
     this.locatie = "Aalst";
     this.naam = "EA";
     this.prijs = 150;
-    this.sporten = ["Voetbal", "atletiek"];
+    this.sporten = ["Voetbal", "atletiek"];*/
   }
 
   ngOnInit() {}
+
+  removeClub() {
+    this.deleteClub.emit(this.club);
+  }
 }

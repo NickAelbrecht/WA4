@@ -1,23 +1,30 @@
-<form class="ui form" [formGroup]='club' (ngSubmit)='onSubmit()'>
-  <h4 class="ui dividing header">Voeg een club toe!</h4>
-  <div class="field">
-    <label for='name_id'>naam:</label>
-    <input type='text' id='name_id' formControlName='naam'>
-  </div>
-  <div *ngIf='club.get("naam").errors?.required && club.get("naam").touched' class='ui pointing red basic label'>
-    error! this is required
-  </div>
+<div class="ui segment">
+  <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
+  <form class="ui form" [formGroup]='club' (ngSubmit)='onSubmit()'>
+    <h4 class="ui dividing header">Voeg een club toe!</h4>
+    <div class="field">
+      <label for='name_id'>naam:</label>
+      <input type='text' id='name_id' formControlName='naam'>
 
-  <div formArrayName='sporten' *ngFor='let item of club.get("sporten").controls; 
-  let i = index'>
-    <div [formGroupName]='i'>
-      <div>
-        <label for="sport_naam">Sport:</label>
-        <div>
-          <input type="text" id="sport_naam" formControlName='sportnaam'>
+      <div *ngIf='club.get("naam").errors?.required && club.get("naam").touched' class='ui pointing red basic label'>
+        Dit is verplicht.
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="sport_naam">Sport:</label>
+      <div formArrayName='sporten' *ngFor='let item of club.get("sporten").controls;   let i = index'>
+        <div [formGroupName]='i'>
+
+          <div class="field">
+            <input type="text" id="sport_naam" formControlName='sportnaam'>
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
-  <button type='submit' class="ui positive right button">add</button>
-</form>
+
+    <button type='submit' class="ui positive right button">Voeg toe</button>
+
+  </form>
+</div>

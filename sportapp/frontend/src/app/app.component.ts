@@ -7,7 +7,7 @@ import { Observable } from "rxjs/Observable";
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"],
-  //providers: [ClubDataService]
+  providers: []//ClubDataService]
 })
 export class AppComponent {//implements OnInit {
   title = "app";

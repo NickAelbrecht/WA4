@@ -2,10 +2,21 @@ import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { PageNotFoundComponent } from "../page-not-found/page-not-found.component";
 
-const appRoutes: Routes = [
+/*const appRoutes: Routes = [
   { path: "", redirectTo: "club-list", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent }
+];*/
+const appRoutes: Routes = [
+  {
+    path: 'club',
+    canActivate: [AuthGuardService],
+    loadChildren: 'app/club/club.module#ClubModule',
+    data: { preload: true }
+  },
+  { path: '', redirectTo: 'club/list', pathMatch: 'full' },
+  { path: '**', component: PageNotFoundComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

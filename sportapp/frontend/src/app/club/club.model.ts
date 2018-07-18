@@ -5,9 +5,10 @@ export class Club {
   private _locatie: string;
   private _prijs: number;
   private _sporten: Sport[];
-  _id: string;
+  private _id: string;
+  
 
-  constructor(naam: string, sporten?: Sport[]) {
+  constructor(naam: string, sporten: Sport[] =[]) {
     this._naam = naam;
     this._sporten = sporten || new Array();
   }
@@ -36,7 +37,7 @@ export class Club {
     return cl;
   }
 
-  toJSON() {
+   toJSON() {
     return {
       _id: this._id,
       naam: this._naam,

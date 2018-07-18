@@ -1,7 +1,22 @@
-<p>
+<!--<p>
   club {{naam}} valt onder categorie {{categorie}} te {{locatie}} en kost {{prijs}}
 </p>
 sporten:
 
 
-<app-add-club></app-add-club>
+<app-add-club></app-add-club>-->
+
+<div class="ui card">
+    <div class="content">
+      <a class="header" href='/club/{{club.id}}'>{{ club.naam }}</a>
+   
+      <ul class="ui list">
+        <li *ngFor='let sp of club.sporten'>
+          <app-sport [sport]='sp'></app-sport>
+        </li>
+      </ul>
+      <button class="ui icon button" (click)="removeRecipe()">
+        <i class="trash outline icon"></i>
+      </button>
+    </div>
+  </div>

@@ -25,7 +25,13 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
-  imports: [BrowserModule, ClubModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    ClubModule,
+    AppRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
