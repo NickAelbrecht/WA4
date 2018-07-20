@@ -1,6 +1,7 @@
 import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { PageNotFoundComponent } from "../page-not-found/page-not-found.component";
+import { AuthGuardService } from "../user/auth-guard.service";
 
 /*const appRoutes: Routes = [
   { path: "", redirectTo: "club-list", pathMatch: "full" },

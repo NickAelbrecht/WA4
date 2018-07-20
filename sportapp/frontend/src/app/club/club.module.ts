@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { ClubDataService } from "./club-data.service";
 import { RouterModule } from "@angular/router";
 import { ClubResolver } from "./club-resolver";
+import { httpInterceptorProviders } from "../http-interceptors";
 
 /*const routes = [
   { path: "club-list", component: ClubListComponent },
@@ -44,6 +45,6 @@ const routes = [
     HomepaginaComponent,
     ClubDetailComponent
   ],
-  providers: [ClubDataService, ClubResolver]
+  providers: [httpInterceptorProviders,ClubDataService, ClubResolver]
 })
 export class ClubModule {}

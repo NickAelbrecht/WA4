@@ -4,14 +4,20 @@ var favicon = require("serve-favicon");
 var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
-let passport = require("passport");
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 var router = express.Router();
-var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/clubdb");
 
 require("./models/Club");
+require("./models/Sport");
+require("./models/Sport");
+
+
+require('./config/passport');
 
 var index = require("./routes/index");
 var users = require("./routes/users");
@@ -50,5 +56,19 @@ app.use(function(err, req, res, next) {
 router.get("/API/club/", function(req, res, next) {
   res.send("process the request here");
 });
+
+passport.use(new LocalStrategy(
+  function (username, password, done) {
+      User.findOne({ username: username }, function (err, user) {
+          if (err) { return done(err); }
+          if (!user) {
+              return done(null, false, { message: 'Incorrect username.' });
+          }
+          if (!user.validPassword(password)) {
+              return done(null, false, { message: 'Incorrect password.' });
+          }
+          return done(null, user);
+      });
+  }));
 
 module.exports = app;

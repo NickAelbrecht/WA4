@@ -4,12 +4,16 @@ var router = express.Router();
 let mongoose = require("mongoose");
 let Club = mongoose.model("Club");
 
+let jwt = require('express-jwt');
+
+let auth = jwt({secret: process.env.RECIPE_BACKEND_SECRET});
+
 /* GET home page. */
 router.get("/", function(req, res, next) {
   res.send("server works");
 });
 
-router.get("/API/clubs/", function(req, res, next) {
+router.get("/API/clubs/", auth, function(req, res, next) {
   let query = Club.find().populate("sporten");
   query.exec(function(err, clubs) {
     if (err) {
