@@ -14,7 +14,7 @@ mongoose.connect("mongodb://localhost/clubdb");
 
 require("./models/Club");
 require("./models/Sport");
-require("./models/Sport");
+require("./models/User");
 
 
 require('./config/passport');
