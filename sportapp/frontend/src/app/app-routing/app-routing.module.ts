@@ -2,6 +2,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 import { PageNotFoundComponent } from "../page-not-found/page-not-found.component";
 import { AuthGuardService } from "../user/auth-guard.service";
+import { SelectivePreloadStrategy } from "./SelectivePreloadStrategy";
 
 /*const appRoutes: Routes = [
   { path: "", redirectTo: "club-list", pathMatch: "full" },
@@ -20,7 +21,10 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {
+    preloadingStrategy: SelectivePreloadStrategy
+  })],
+  providers: [SelectivePreloadStrategy],
   declarations: [],
   exports: [RouterModule]
 })

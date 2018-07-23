@@ -47,7 +47,7 @@ export class AuthenticationService {
 
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.post(`/API/users/login`, { username, password }).pipe(
+    return this.http.post(`${this._url}/login`, { username, password }).pipe(
       map((res: any) => {
         const token = res.token;
         if (token) {
@@ -62,7 +62,7 @@ export class AuthenticationService {
   }
 
   register(username: string, password: string): Observable<boolean> {
-    return this.http.post(`/API/users/register`, { username, password }).pipe(
+    return this.http.post(`${this._url}/register`, { username, password }).pipe(
       map((res: any) => {
         const token = res.token;
         if (token) {
@@ -77,14 +77,14 @@ export class AuthenticationService {
   }
 
   logout() {
-    if (this._user$.getValue()) {
-      localStorage.removeItem('currentUser');
+    if (this.user$.getValue()) {
+      localStorage.removeItem(this._tokenKey);
       setTimeout(() => this._user$.next(null));
     }
   }
 
   checkUserNameAvailability(username: string): Observable<boolean> {
-    return this.http.post(`/API/users/checkusername`, { username }).pipe(
+    return this.http.post(`${this._url}/checkusername`, { username }).pipe(
       map((item: any) => {
         if (item.username === 'alreadyexists') {
           return false;

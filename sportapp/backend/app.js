@@ -24,6 +24,9 @@ var users = require("./routes/users");
 let cors = require("cors");
 
 var app = express();
+app.use(cors({ origin: '*' }));
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -33,7 +36,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 
 app.use("/", index);
-app.use("/users", users);
+app.use("/API/users", users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -53,7 +56,7 @@ app.use(function(err, req, res, next) {
   res.json(err.message);
 });
 
-router.get("/API/club/", function(req, res, next) {
+/*router.get("/API/club/", function(req, res, next) {
   res.send("process the request here");
 });
 
@@ -69,6 +72,6 @@ passport.use(new LocalStrategy(
           }
           return done(null, user);
       });
-  }));
+  }));*/
 
 module.exports = app;

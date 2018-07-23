@@ -1,3 +1,8 @@
+let mongoose = require('mongoose');
+let crypto = require('crypto');
+let jwt = require('jsonwebtoken');
+
+
 let UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -32,3 +37,5 @@ UserSchema.methods.generateJWT = function() {
     process.env.RECIPE_BACKEND_SECRET
   );
 };
+
+mongoose.model("User", UserSchema);

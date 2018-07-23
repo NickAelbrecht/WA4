@@ -3,17 +3,18 @@ var router = express.Router();
 
 let mongoose = require("mongoose");
 let Club = mongoose.model("Club");
+let Sport = mongoose.model("Sport");
 
-let jwt = require('express-jwt');
+let jwt = require("express-jwt");
 
-let auth = jwt({secret: process.env.RECIPE_BACKEND_SECRET});
+let auth = jwt({ secret: process.env.RECIPE_BACKEND_SECRET });
 
 /* GET home page. */
 router.get("/", function(req, res, next) {
   res.send("server works");
 });
 
-router.get("/API/clubs/", auth, function(req, res, next) {
+router.get("/API/clubs/", function(req, res, next) {
   let query = Club.find().populate("sporten");
   query.exec(function(err, clubs) {
     if (err) {
@@ -23,7 +24,7 @@ router.get("/API/clubs/", auth, function(req, res, next) {
   });
 });
 
-router.post("/API/clubs/", function(req, res, next) {
+router.post("/API/clubs/", auth, function(req, res, next) {
   Sport.create(req.body.sporten, function(err, sp) {
     if (err) {
       return next(err);
@@ -40,7 +41,7 @@ router.post("/API/clubs/", function(req, res, next) {
   });
 });
 
-router.post("/API/club/:club/sporten", function(req, res, next) {
+router.post("/API/club/:club/sporten", auth,function(req, res, next) {
   let sp = new Sport(req.body);
 
   sp.save(function(err, sport) {
@@ -59,7 +60,7 @@ router.get("/API/club/:club", function(req, res, next) {
 });
 
 router.param("club", function(req, res, next, id) {
-  let query = Club.findById(id);
+  let query = Club.findById(id).populate("sporten");
   query.exec(function(err, club) {
     if (err) {
       return next(err);
@@ -72,7 +73,7 @@ router.param("club", function(req, res, next, id) {
   });
 });
 
-router.delete("/API/club/:club", function(req, res, next) {
+router.delete("/API/club/:club", auth,function(req, res, next) {
   Sport.remove({ _id: { $in: req.club.sporten } }, function(err) {
     if (err) return next(err);
     req.club.remove(function(err) {

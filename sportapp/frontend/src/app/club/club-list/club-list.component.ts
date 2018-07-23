@@ -15,8 +15,8 @@ export class ClubListComponent implements OnInit {
   public filterClub$ = new Subject<string>();
 
   public errorMsg: string;
-
   private _clubs: Club[];
+
   constructor(private _clubDataService: ClubDataService) {
     this.filterClub$
       .pipe(
@@ -33,7 +33,7 @@ export class ClubListComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
-        } while trying to retrieve recipes: ${error.error}`;
+        } while trying to retrieve clubs: ${error.error}`;
       }
     );
   }

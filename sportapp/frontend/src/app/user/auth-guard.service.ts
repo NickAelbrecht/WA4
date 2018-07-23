@@ -9,9 +9,10 @@ import { AuthenticationService } from "./authentication.service";
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  private authService: AuthenticationService;
-  private router: Router;
-  onstructor() {}
+ // private authService: AuthenticationService;
+ // private router: Router;
+  
+  constructor(private authService: AuthenticationService, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

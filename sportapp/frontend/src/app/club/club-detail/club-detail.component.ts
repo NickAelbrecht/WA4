@@ -30,7 +30,7 @@ export class ClubDetailComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
-        } while trying to retrieve recipe: ${error.error}`;
+        } while trying to retrieve club: ${error.error}`;
       }
     );
   }

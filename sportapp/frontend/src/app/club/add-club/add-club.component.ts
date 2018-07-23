@@ -34,7 +34,7 @@ export class AddClubComponent implements OnInit {
 
   ngOnInit() {
     this.club = this.fb.group({
-      naam: this.fb.control("", Validators.required),
+      naam: ['', [Validators.required, Validators.minLength(2)]],
       sporten: this.fb.array([this.createSporten()])
     });
     this.sporten.valueChanges

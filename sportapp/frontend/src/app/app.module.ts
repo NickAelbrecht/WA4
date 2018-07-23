@@ -1,3 +1,4 @@
+import { UserModule } from './user/user.module';
 import { ClubModule } from "./club/club.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -27,7 +28,8 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
   declarations: [AppComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
-    ClubModule,
+    //ClubModule,
+    UserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule
