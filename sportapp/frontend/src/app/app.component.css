@@ -1,0 +1,13 @@
+.item{
+    font-style: italic;
+    font-size: 12pt
+}
+.ui.footer.segment{
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
+.comp{
+    padding: 10px;
+    margin: 25px
+}

@@ -1,15 +1,17 @@
-<div class="ui segment">
+<div class="bg">
+  <div class="ui segment">
     <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
     <div class="ui basic segment">
       <div class="ui two fields">
         <div class="ui input">
-          <input (keyup)='filterClub$.next($event.target.value)' type='text' id='filter' name='filter' placeholder='filter club name...'>
+          <input (keyup)='filterClub$.next($event.target.value)' type='text' id='filter' name='filter' placeholder='filter club naam...'>
         </div>
       </div>
     </div>
     <div class="ui basic segment">
-      <div class="ui cards">
+      <div class="ui cards ">
         <app-club *ngFor='let lc of clubs | clubFilter:filterClubNaam' [club]='lc' (deleteClub)='removeClub($event)'></app-club>
       </div>
     </div>
   </div>
+</div>

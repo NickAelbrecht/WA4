@@ -26,6 +26,7 @@ export class ClubDataService {
   }
 
   addNewClub(club: Club): Observable<Club> {
+    //console.log(club);
     return this.http
       .post(`${this._appUrl}/clubs/`, club)
       .pipe(map(Club.fromJSON))

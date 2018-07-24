@@ -11,6 +11,7 @@ import { Sport } from "../sport/sport.model";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ClubDataService } from "../club-data.service";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Placeholder } from "../../../../node_modules/@angular/compiler/src/i18n/i18n_ast";
 
 @Component({
   selector: "app-add-club",
@@ -34,7 +35,9 @@ export class AddClubComponent implements OnInit {
 
   ngOnInit() {
     this.club = this.fb.group({
-      naam: ['', [Validators.required, Validators.minLength(2)]],
+      naam: ["", [Validators.required, Validators.minLength(2)]],
+      locatie: [""],
+      prijs: [""],
       sporten: this.fb.array([this.createSporten()])
     });
     this.sporten.valueChanges
@@ -66,26 +69,31 @@ export class AddClubComponent implements OnInit {
   }
 
   onSubmit() {
+   // console.log(this.club.value.sporten)   
+   // console.log(this.club.value.prijs)
+
     const club = new Club(this.club.value.naam);
     for (const sport of this.club.value.sporten) {
       if (sport.sportnaam.length > 2) {
         club.addSport(new Sport(sport.sportnaam));
       }
+      if (this.club.value.prijs != null) {
+        club.prijs = this.club.value.prijs;
+      }
+      if (this.club.value.locatie != null) {
+        club.locatie = this.club.value.locatie;
+      }
     }
 
-    //this.newClub.emit(club);
+   // console.log(club)
     this._clubDataService.addNewClub(club).subscribe(
       () => {},
       (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} while adding
-          recipe for ${club.naam}: ${error.error}`;
+        this.errorMsg = `Error ${error.status} bij het toevoegen van 
+          club ${club.naam}: ${error.error}`;
       }
     );
   }
 
-  /*addClub(newclubname: HTMLInputElement): boolean {
-    const club = new Club(newclubname.value);
-    this.newClub.emit(club);
-    return false;
-  }*/
+
 }

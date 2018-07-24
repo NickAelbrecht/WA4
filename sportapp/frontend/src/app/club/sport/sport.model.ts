@@ -17,9 +17,9 @@ export class Sport {
   }
 
   static fromJSON(json): Sport {
-    const rec = new Sport(json.naam);
-    rec._id = json._id;
-    return rec;
+    const sp = new Sport(json.naam);
+    sp._id = json._id;
+    return sp;
   }
 
   toJSON() {

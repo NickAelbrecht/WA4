@@ -1,13 +1,13 @@
 <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
 <form [formGroup]='user' (ngSubmit)='onSubmit()' class="ui large form segment">
-  <h3 class="ui header">login</h3>
+  <h3 class="ui header">Inloggen</h3>
   <div class="field">
-    <label for="username">username:</label>
-    <input type="text" id="username" formControlName='username'>
+    <label for="username">Gebruikersnaam:</label>
+    <input type="text" id="username" formControlName='username' placeholder="Gebruikersnaam">
   </div>
   <div class="field">
-    <label for="password">password:</label>
-    <input type="password" id="password" formControlName='password'>
+    <label for="password">Wachtwoord:</label>
+    <input type="password" id="password" formControlName='password' placeholder="Wachtwoord">
   </div>
   <button type='submit' [disabled]='!user.valid' class="ui positive right floated button" id='loginbtn'>log in</button>
 </form>

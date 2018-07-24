@@ -1,12 +1,19 @@
 <div class="ui card">
-    <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
-    <div class="content">
-      <a class="header">detailed club for {{ club.naam }}</a>
-      
-      <ul class="ui list">
-        <li *ngFor='let sp of club.sporten'>
-          <app-sport [sport]='sp'></app-sport>
-        </li>
-      </ul>
-    </div>
+  <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
+  <div class="content">
+    <a class="header">Details van de club {{ club.naam }}</a>
+
+    <p>De verschillende sporten die je hier kan doen:</p>
+    <ul class="ui list">
+      <li *ngFor='let sport of club.sporten'>
+        <app-sport [sport]='sport'></app-sport>
+      </li>
+    </ul>
+    <p>De prijs: </p>
+    <div class="number">{{club.prijs}}</div>
+    <p>
+      Locatie van de club:
+    </p>
+    <div class="text">{{club.locatie}}</div>
   </div>
+</div>

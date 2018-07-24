@@ -9,7 +9,7 @@ export class Club {
 
   constructor(naam: string, sporten: Sport[] = []) {
     this._naam = naam;
-    this._sporten = sporten ;//|| new Array();
+    this._sporten = sporten; //|| new Array();
   }
 
   get naam(): string {
@@ -18,9 +18,17 @@ export class Club {
   get locatie(): string {
     return this._locatie;
   }
+  set locatie(locatie: string) {
+    this._locatie = locatie;
+  }
   get prijs(): number {
     return this._prijs;
   }
+
+  set prijs(prijs: number) {
+    this._prijs = prijs;
+  }
+
   get sporten(): Sport[] {
     return this._sporten;
   }
@@ -32,6 +40,8 @@ export class Club {
   static fromJSON(json: any): Club {
     const cl = new Club(json.naam, json.sporten.map(Sport.fromJSON));
     cl._id = json._id;
+    cl._locatie = json.locatie;
+    cl._prijs = json.prijs;
 
     return cl;
   }
@@ -40,7 +50,9 @@ export class Club {
     return {
       _id: this._id,
       naam: this._naam,
-      sporten: this._sporten.map(sp => sp.toJSON())
+      sporten: this._sporten.map(sp => sp.toJSON()),
+      prijs: this._prijs,
+      locatie:this._locatie
     };
   }
 

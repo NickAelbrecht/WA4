@@ -33,7 +33,7 @@ export class ClubListComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status
-        } while trying to retrieve clubs: ${error.error}`;
+        } bij het ophalen van clubs: ${error.error}`;
       }
     );
   }
@@ -46,7 +46,7 @@ export class ClubListComponent implements OnInit {
     this._clubDataService.removeClub(club).subscribe(
       item => (this._clubs = this._clubs.filter(val => item.id !== val.id)),
       (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} while removing clubs for ${
+        this.errorMsg = `Error ${error.status} bij het verwijderen van club ${
           club.naam
         }: ${error.error}`;
       }
