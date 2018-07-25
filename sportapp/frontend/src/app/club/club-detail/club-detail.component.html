@@ -2,18 +2,21 @@
   <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
   <div class="content">
     <a class="header">Details van de club {{ club.naam }}</a>
+    <hr>
 
-    <p>De verschillende sporten die je hier kan doen:</p>
+    <h4 class="ui header">De verschillende sporten die je hier kan doen:</h4>
     <ul class="ui list">
       <li *ngFor='let sport of club.sporten'>
         <app-sport [sport]='sport'></app-sport>
+        <br>
       </li>
     </ul>
-    <p>De prijs: </p>
-    <div class="number">{{club.prijs}}</div>
-    <p>
+    <h4 class="ui sub header">De prijs: </h4>
+    <span class="number">{{club.prijs}}</span>
+    <h4 class="ui sub header">
       Locatie van de club:
-    </p>
-    <div class="text">{{club.locatie}}</div>
+    </h4>
+    <span class="text">{{club.locatie}}</span>
   </div>
 </div>
+

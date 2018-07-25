@@ -1,12 +1,15 @@
 <div class="ui segment">
   <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
   <div class="ui basic segment">
-    <div class="ui two fields">
+    <div class="ui field">
       <div class="ui input">
         <input (keyup)='filterClub$.next($event.target.value)' type='text' id='filter' name='filter' placeholder='filter club naam...'>
       </div>
     </div>
   </div>
+  <div class="ui icon button" data-tooltip="Klik op de naam van een club om de details te bekijken!" data-inverted="">
+      <i class="icon info"></i>
+    </div>
   <div class="ui basic segment">
     <div class="ui three stackable cards">
       <app-club *ngFor='let localClub of clubs | clubFilter:filterClubNaam' [club]='localClub' (deleteClub)='removeClub($event)'></app-club>

@@ -1,3 +1,6 @@
 .ui.segment {
   margin: 2%;
 }
+.ui.icon.button{
+  float: right
+}
