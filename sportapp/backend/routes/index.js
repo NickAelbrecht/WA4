@@ -29,7 +29,7 @@ router.post("/API/clubs/",  function(req, res, next) { //auth,
     if (err) {
       return next(err);
     }
-    let club = new Club({ naam: req.body.naam });
+    let club = new Club({ naam: req.body.naam, prijs:req.body.prijs,locatie:req.body.locatie });
     club.sporten = sp;
     club.save(function(err, rec) {
       if (err) {

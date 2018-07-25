@@ -1,4 +1,4 @@
-import { UserModule } from './user/user.module';
+import { UserModule } from "./user/user.module";
 import { ClubModule } from "./club/club.module";
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
@@ -12,7 +12,6 @@ import { AddClubComponent } from "./club/add-club/add-club.component";
 import { ClubListComponent } from "./club/club-list/club-list.component";
 import { SportComponent } from "./club/sport/sport.component";
 import { ClubDetailComponent } from "./club/club-detail/club-detail.component";
-import { HomepaginaComponent } from "./club/homepagina/homepagina.component";
 import { ClubFilterPipe } from "./club/club-filter.pipe";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AppRoutingModule } from "./app-routing/app-routing.module";

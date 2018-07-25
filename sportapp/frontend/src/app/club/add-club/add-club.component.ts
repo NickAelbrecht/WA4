@@ -20,7 +20,6 @@ import { Placeholder } from "../../../../node_modules/@angular/compiler/src/i18n
 })
 export class AddClubComponent implements OnInit {
   //@Output() public newClub = new EventEmitter<Club>();
-
   private club: FormGroup;
   public errorMsg: string;
 
@@ -34,7 +33,7 @@ export class AddClubComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.club = this.fb.group({
+    /* this.club = this.fb.group({
       naam: ["", [Validators.required, Validators.minLength(2)]],
       locatie: [""],
       prijs: [""],
@@ -51,17 +50,43 @@ export class AddClubComponent implements OnInit {
           this.sporten.push(this.createSporten());
         } else if (spLijst.length >= 2) {
           const secondToLast = spLijst[spLijst.length - 2];
+
           if (
             !lastElement.sportnaam(
               !secondToLast.sportnaam || secondToLast.sportnaam.length < 2
             )
           ) {
             this.sporten.removeAt(this.sporten.length - 1);
+            console.log("formgroup weg");
           }
+        }
+      });*/
+
+    this.club = this.fb.group({
+      naam: ["", [Validators.required, Validators.minLength(2)]],
+      locatie: [""],
+      prijs: [""],
+      sporten: this.fb.array([this.createSporten()])
+    });
+
+    this.sporten.statusChanges
+      .pipe(
+        //statusChanges
+        debounceTime(400),
+        distinctUntilChanged()
+      )
+      .subscribe(spLijst => {
+        if (spLijst === "VALID") {
+          this.sporten.push(this.createSporten());
         }
       });
   }
 
+  /* createSporten(): FormGroup {
+    return this.fb.group({
+      sportnaam: ["", [Validators.required, Validators.minLength(3)]] //]]
+    });
+  }*/
   createSporten(): FormGroup {
     return this.fb.group({
       sportnaam: ["", [Validators.required, Validators.minLength(3)]]
@@ -69,31 +94,49 @@ export class AddClubComponent implements OnInit {
   }
 
   onSubmit() {
-   // console.log(this.club.value.sporten)   
-   // console.log(this.club.value.prijs)
+    // console.log(this.club.value.sporten)
+    // console.log(this.club.value.prijs)
 
-    const club = new Club(this.club.value.naam);
-    for (const sport of this.club.value.sporten) {
-      if (sport.sportnaam.length > 2) {
-        club.addSport(new Sport(sport.sportnaam));
-      }
-      if (this.club.value.prijs != null) {
-        club.prijs = this.club.value.prijs;
-      }
-      if (this.club.value.locatie != null) {
-        club.locatie = this.club.value.locatie;
+    /*const club = new Club(this.club.value.naam);
+
+    if (this.club.value.sporten != null) {
+      for (const sport of this.club.value.sporten) {
+        if (sport.sportnaam.length > 2) {
+          const sp = new Sport(sport.sportnaam);
+          club.addSport(sp);
+        }
       }
     }
+    if (this.club.value.prijs != null) {
+      club.prijs = this.club.value.prijs;
+    }
+    if (this.club.value.locatie != null) {
+      club.locatie = this.club.value.locatie;
+    }
 
-   // console.log(club)
+    // console.log(club)
     this._clubDataService.addNewClub(club).subscribe(
       () => {},
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} bij het toevoegen van 
           club ${club.naam}: ${error.error}`;
       }
+    );*/
+    const club = new Club(this.club.value.naam);
+    club.prijs = this.club.value.prijs;
+    club.locatie = this.club.value.locatie;
+    for (const sport of this.club.value.sporten) {
+      console.log(sport.sportnaam)
+      if (sport.sportnaam.length > 2) {
+        club.addSport(new Sport(sport.sportnaam));
+      }
+    }
+    this._clubDataService.addNewClub(club).subscribe(
+      () => {},
+      (error: HttpErrorResponse) => {
+        this.errorMsg =
+          "Error ${error.status} bij het toevoegen van een club ${club.naam}: ${error.error}";
+      }
     );
   }
-
-
 }

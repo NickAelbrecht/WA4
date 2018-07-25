@@ -10,6 +10,7 @@ export class ClubComponent implements OnInit {
   @Input() public club: Club;
 
   @Output() public deleteClub = new EventEmitter<Club>();
+  
   constructor() {}
 
   ngOnInit() {}

@@ -29,7 +29,7 @@ export class ClubListComponent implements OnInit {
 
   ngOnInit() {
     this._clubDataService.clubs.subscribe(
-      items => (this._clubs = items),
+      clubs => (this._clubs = clubs),
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${
           error.status

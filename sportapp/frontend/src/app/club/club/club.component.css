@@ -1,0 +1,15 @@
+.ui.card{
+    width: 275px;
+    height: 200px;
+    margin: 2%;
+    
+    
+}
+.ui.icon.button{    
+    margin-top: 45%;
+   
+}
+.ui.list{
+    float: right;
+    margin-right: 5%
+}

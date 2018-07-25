@@ -7,30 +7,23 @@ import { Sport } from "./sport/sport.model";
 
 @Injectable()
 export class ClubDataService {
- // private _clubs = new Array<Club>();
   private readonly _appUrl = "/API";
 
-  constructor(private http: HttpClient) {
-   /* let club1 = new Club("test");
-    this._clubs.push(club1);*/
-  }
+  constructor(private http: HttpClient) {}
 
   get clubs(): Observable<Club[]> {
-    return this.http
-      .get(`${this._appUrl}/clubs/`)
-      .pipe(
-        map((list: any[]): Club[] =>
-        list.map(Club.fromJSON))
-         //list.map(item => new Club(item.naam)))
-      );
+    return this.http.get(`${this._appUrl}/clubs/`).pipe(
+      map((list: any[]): Club[] => list.map(Club.fromJSON))
+      //list.map(item => new Club(item.naam)))
+    );
   }
 
   addNewClub(club: Club): Observable<Club> {
     //console.log(club);
     return this.http
       .post(`${this._appUrl}/clubs/`, club)
-      .pipe(map(Club.fromJSON))
-     // .pipe(map((item: any): Club => new Club(item.naam)));
+      .pipe(map(Club.fromJSON));
+    // .pipe(map((item: any): Club => new Club(item.naam)));
   }
 
   removeClub(cl: Club): Observable<Club> {
@@ -46,7 +39,6 @@ export class ClubDataService {
 
   getClub(id: string): Observable<Club> {
     return this.http
-      .get(`${this._appUrl}/club/${id}`)
-      .pipe(map(Club.fromJSON));
+    .get(`${this._appUrl}/club/${id}`).pipe(map(Club.fromJSON));
   }
 }
