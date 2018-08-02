@@ -4,9 +4,7 @@
 
     <ul class="ui list">
       <li *ngFor='let sport of club.sporten'>
-        
-          <app-sport [sport]='sport'></app-sport>
-        
+        <app-sport [sport]='sport'></app-sport>
       </li>
     </ul>
     <button class="ui icon button" (click)="removeClub()">

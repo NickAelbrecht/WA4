@@ -16,7 +16,7 @@ export class Sport {
     this._naam = naam;
   }
 
-  static fromJSON(json): Sport {
+  static fromJSON(json:any): Sport {
     const sp = new Sport(json.naam);
     sp._id = json._id;
     return sp;

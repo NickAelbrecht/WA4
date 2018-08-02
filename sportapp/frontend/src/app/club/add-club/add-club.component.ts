@@ -19,7 +19,6 @@ import { Placeholder } from "../../../../node_modules/@angular/compiler/src/i18n
   styleUrls: ["./add-club.component.css"]
 })
 export class AddClubComponent implements OnInit {
-  //@Output() public newClub = new EventEmitter<Club>();
   private club: FormGroup;
   public errorMsg: string;
 
@@ -33,7 +32,7 @@ export class AddClubComponent implements OnInit {
   }
 
   ngOnInit() {
-    /* this.club = this.fb.group({
+    this.club = this.fb.group({
       naam: ["", [Validators.required, Validators.minLength(2)]],
       locatie: [""],
       prijs: [""],
@@ -50,93 +49,52 @@ export class AddClubComponent implements OnInit {
           this.sporten.push(this.createSporten());
         } else if (spLijst.length >= 2) {
           const secondToLast = spLijst[spLijst.length - 2];
-
-          if (
-            !lastElement.sportnaam(
-              !secondToLast.sportnaam || secondToLast.sportnaam.length < 2
-            )
-          ) {
+          if (secondToLast.sportnaam.length < 1) {
             this.sporten.removeAt(this.sporten.length - 1);
-            console.log("formgroup weg");
           }
-        }
-      });*/
-
-    this.club = this.fb.group({
-      naam: ["", [Validators.required, Validators.minLength(2)]],
-      locatie: [""],
-      prijs: [""],
-      sporten: this.fb.array([this.createSporten()])
-    });
-
-    this.sporten.statusChanges
-      .pipe(
-        //statusChanges
-        debounceTime(400),
-        distinctUntilChanged()
-      )
-      .subscribe(spLijst => {
-        if (spLijst === "VALID") {
-          this.sporten.push(this.createSporten());
         }
       });
   }
-
-  /* createSporten(): FormGroup {
-    return this.fb.group({
-      sportnaam: ["", [Validators.required, Validators.minLength(3)]] //]]
-    });
-  }*/
   createSporten(): FormGroup {
     return this.fb.group({
-      sportnaam: ["", [Validators.required, Validators.minLength(3)]]
+      sportnaam: [""]
     });
   }
 
   onSubmit() {
-    // console.log(this.club.value.sporten)
-    // console.log(this.club.value.prijs)
-
-    /*const club = new Club(this.club.value.naam);
-
-    if (this.club.value.sporten != null) {
-      for (const sport of this.club.value.sporten) {
-        if (sport.sportnaam.length > 2) {
-          const sp = new Sport(sport.sportnaam);
-          club.addSport(sp);
-        }
-      }
-    }
-    if (this.club.value.prijs != null) {
-      club.prijs = this.club.value.prijs;
-    }
-    if (this.club.value.locatie != null) {
-      club.locatie = this.club.value.locatie;
-    }
-
-    // console.log(club)
-    this._clubDataService.addNewClub(club).subscribe(
-      () => {},
-      (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} bij het toevoegen van 
-          club ${club.naam}: ${error.error}`;
-      }
-    );*/
     const club = new Club(this.club.value.naam);
     club.prijs = this.club.value.prijs;
     club.locatie = this.club.value.locatie;
+
     for (const sport of this.club.value.sporten) {
-      console.log(sport.sportnaam)
       if (sport.sportnaam.length > 2) {
-        club.addSport(new Sport(sport.sportnaam));
+        const sport1 = new Sport(sport.sportnaam);
+        console.log(sport1);
+        club.addSport(sport1);
+        console.log(sport1);
       }
     }
-    this._clubDataService.addNewClub(club).subscribe(
+   /* this._clubDataService.addNewClub(club).subscribe(
       () => {},
       (error: HttpErrorResponse) => {
-        this.errorMsg =
-          "Error ${error.status} bij het toevoegen van een club ${club.naam}: ${error.error}";
+        this.errorMsg = `Error ${error.status} bij het toevoegen van een club ${
+          club.naam
+        }: ${error.error}`;
       }
-    );
+    );*/
+    if (club.naam.length < 1) {
+      this.errorMsg = "De clubnaam mag niet leeg zijn!";
+    } else if (club.sporten.length < 1) {
+      this.errorMsg = "Een club moet minstens 1 sport bevatten!";
+    } else {
+      this._clubDataService.addNewClub(club).subscribe(
+        () => {},
+        (error: HttpErrorResponse) => {
+          this.errorMsg = `Error ${
+            error.status
+          } bij het toevoegen van een club ${club.naam}: ${error.error}`;
+        }
+      );
+    }
   }
 }

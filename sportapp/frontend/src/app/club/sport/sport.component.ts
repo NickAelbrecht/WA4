@@ -8,6 +8,7 @@ import { Sport } from "./sport.model";
 })
 export class SportComponent implements OnInit {
   @Input() public sport: Sport;
+  
   constructor() {}
 
   ngOnInit() {}

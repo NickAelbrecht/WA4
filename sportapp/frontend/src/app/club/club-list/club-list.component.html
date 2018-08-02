@@ -8,11 +8,11 @@
     </div>
   </div>
   <div class="ui icon button" data-tooltip="Klik op de naam van een club om de details te bekijken!" data-inverted="">
-      <i class="icon info"></i>
-    </div>
+    <i class="icon info"></i>
+  </div>
   <div class="ui basic segment">
     <div class="ui three stackable cards">
-      <app-club *ngFor='let localClub of clubs | clubFilter:filterClubNaam' [club]='localClub' (deleteClub)='removeClub($event)'></app-club>
+      <app-club *ngFor='let localClub of clubs | clubFilter:filterClubNaam:filterClubLocatie' [club]='localClub' (deleteClub)='removeClub($event)'></app-club>
     </div>
   </div>
 </div>

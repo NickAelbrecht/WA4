@@ -9,6 +9,7 @@
         Dit is verplicht.
       </div>
     </div>
+
     <div class="field">
       <label for='prijs'>prijs:</label>
       <input type='number' id='prijs' formControlName='prijs'>
@@ -19,10 +20,11 @@
     </div>
 
     <div class="field">
-      <label for="sport_naam">Sport:</label>
+
       <div formArrayName='sporten' *ngFor='let item of sporten.controls;   let i = index'>
         <!--club.get("sporten")-->
         <div [formGroupName]='i'>
+          <label for="sport_naam">Sport:</label>
           <div class="field">
             <input type="text" id="sport_naam" formControlName='sportnaam'>
           </div>

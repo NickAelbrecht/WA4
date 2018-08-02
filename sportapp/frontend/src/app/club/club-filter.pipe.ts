@@ -6,12 +6,26 @@ import { Club } from "./club.model";
   // pure: false
 })
 export class ClubFilterPipe implements PipeTransform {
-  transform(clubs: Club[], naam: string): Club[] {
-    if (!naam || naam.length === 0) {
+  transform(clubs: Club[], naam: string, locatie: string): Club[] {
+    if (clubs && clubs.length) {
+      return clubs.filter(club => {
+        if (
+          naam &&
+          club.naam.toLowerCase().indexOf(naam.toLowerCase()) === -1
+        ) {
+          return false;
+        }
+        if (
+          locatie &&
+          club.locatie.toLowerCase().indexOf(locatie.toLowerCase()) === -1
+        ) {
+          return false;
+        }
+
+        return true;
+      });
+    } else {
       return clubs;
     }
-    return clubs.filter(rec =>
-      rec.naam.toLowerCase().startsWith(naam.toLowerCase())
-    );
   }
 }

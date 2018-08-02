@@ -12,6 +12,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 })
 export class ClubListComponent implements OnInit {
   public filterClubNaam: string;
+
   public filterClub$ = new Subject<string>();
 
   public errorMsg: string;
@@ -31,9 +32,9 @@ export class ClubListComponent implements OnInit {
     this._clubDataService.clubs.subscribe(
       clubs => (this._clubs = clubs),
       (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${
-          error.status
-        } bij het ophalen van clubs: ${error.error}`;
+        this.errorMsg = `Error ${error.status} bij het ophalen van clubs: ${
+          error.error
+        }`;
       }
     );
   }

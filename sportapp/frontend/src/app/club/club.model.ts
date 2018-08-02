@@ -9,7 +9,7 @@ export class Club {
 
   constructor(naam: string, sporten: Sport[] = []) {
     this._naam = naam;
-    this._sporten = sporten; //|| new Array();
+    this._sporten = sporten || new Array(); //|| new Array();
   }
 
   get naam(): string {
