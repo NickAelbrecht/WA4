@@ -12,7 +12,6 @@ import { HttpErrorResponse } from "@angular/common/http";
 })
 export class ClubListComponent implements OnInit {
   public filterClubNaam: string;
-
   public filterClub$ = new Subject<string>();
 
   public errorMsg: string;

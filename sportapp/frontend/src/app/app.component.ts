@@ -11,34 +11,10 @@ import { AuthenticationService } from "./user/authentication.service";
   providers: [] //ClubDataService]
 })
 export class AppComponent {
-  //implements OnInit {
   title = "app";
   constructor(private authService: AuthenticationService) {}
 
   get currentUser(): Observable<string> {
     return this.authService.user$;
   }
-
-  /*private _clubs: Club[];
-  public filterClubName: string;
-
-  applyFilter(filter: string) {
-    this.filterClubName = filter;
-  }
-
-  ngOnInit() {
-    this._clubDataService.clubs.subscribe(items => (this._clubs = items));
-  }
-
-  constructor(private _clubDataService: ClubDataService) {}
-
-  get clubs() {
-    return this._clubs;
-  }
-
-  newClubAdded(club) {
-    this._clubDataService
-      .addNewClub(club)
-      .subscribe(item => this._clubs.push(item));
-  }*/
 }

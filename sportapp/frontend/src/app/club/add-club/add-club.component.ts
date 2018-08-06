@@ -11,7 +11,6 @@ import { Sport } from "../sport/sport.model";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ClubDataService } from "../club-data.service";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Placeholder } from "../../../../node_modules/@angular/compiler/src/i18n/i18n_ast";
 
 @Component({
   selector: "app-add-club",
@@ -19,7 +18,7 @@ import { Placeholder } from "../../../../node_modules/@angular/compiler/src/i18n
   styleUrls: ["./add-club.component.css"]
 })
 export class AddClubComponent implements OnInit {
-  private club: FormGroup;
+  public club: FormGroup;
   public errorMsg: string;
 
   constructor(
@@ -65,16 +64,16 @@ export class AddClubComponent implements OnInit {
     const club = new Club(this.club.value.naam);
     club.prijs = this.club.value.prijs;
     club.locatie = this.club.value.locatie;
-
+    // club.sporten = this.club.value.sporten;
     for (const sport of this.club.value.sporten) {
+      //console.log(sport);
       if (sport.sportnaam.length > 2) {
         const sport1 = new Sport(sport.sportnaam);
-        console.log(sport1);
         club.addSport(sport1);
-        console.log(sport1);
+       // console.log(sport1);
       }
     }
-   /* this._clubDataService.addNewClub(club).subscribe(
+    /* this._clubDataService.addNewClub(club).subscribe(
       () => {},
       (error: HttpErrorResponse) => {
         this.errorMsg = `Error ${error.status} bij het toevoegen van een club ${

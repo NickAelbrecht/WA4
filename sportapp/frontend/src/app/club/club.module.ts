@@ -16,11 +16,6 @@ import {
   basehttpInterceptorProviders
 } from "../http-interceptors";
 
-/*const routes = [
-  { path: "club-list", component: ClubListComponent },
-  { path: "add-club", component: AddClubComponent },
-  { path: 'club-detail/:id', component: ClubDetailComponent, resolve : {club: ClubResolver}}
-];*/
 const routes = [
   { path: "list", component: ClubListComponent },
   { path: "add", component: AddClubComponent },

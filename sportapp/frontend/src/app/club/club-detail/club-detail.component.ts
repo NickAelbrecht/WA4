@@ -22,15 +22,12 @@ export class ClubDetailComponent implements OnInit {
     return this._club;
   }
   ngOnInit() {
-    /*this.route.paramMap.subscribe(pa =>
-      this.clubDataService.getClub(pa.get('id'))
-        .subscribe(item => this._club = item))*/
     this.route.data.subscribe(
       item => (this._club = item["club"]),
       (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${
-          error.status
-        } bij het ophalen van de club: ${error.error}`;
+        this.errorMsg = `Error ${error.status} bij het ophalen van de club: ${
+          error.error
+        }`;
       }
     );
   }

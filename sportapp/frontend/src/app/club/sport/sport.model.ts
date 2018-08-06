@@ -2,6 +2,11 @@ export class Sport {
   private _id: string;
   private _naam: string;
 
+  static fromJSON(json): Sport {
+    const sp = new Sport(json.naam);
+    sp._id = json._id;
+    return sp;
+  }
   constructor(naam: string) {
     this._naam = naam;
   }
@@ -14,12 +19,6 @@ export class Sport {
   }
   set naam(naam: string) {
     this._naam = naam;
-  }
-
-  static fromJSON(json:any): Sport {
-    const sp = new Sport(json.naam);
-    sp._id = json._id;
-    return sp;
   }
 
   toJSON() {

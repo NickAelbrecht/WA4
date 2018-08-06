@@ -1,7 +1,7 @@
 <div class="ui container">
   <div class="ui secondary pointing menu">
     <a class='blue item' routerLinkActive='active' routerLink="/club/list">Clubs</a>
-    <a class='item' routerLinkActive='active' routerLink="/club/add">Club toevoegen</a>
+    <a class='green item' routerLinkActive='active' routerLink="/club/add">Club toevoegen</a>
     <a *ngIf='(currentUser | async) else loginlink' class="red right item" routerLinkActive='active' routerLink="/logout">{{currentUser|async}}/uitloggen</a>
     <ng-template #loginlink>
       <a class="green right item" routerLinkActive='active' routerLink="/login">log in</a>

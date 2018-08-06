@@ -33,6 +33,7 @@ router.post("/API/clubs/",  function(req, res, next) { //auth,
     club.sporten = sp;
     club.save(function(err, rec) {
       if (err) {
+        console.log("error!!!")
         Sport.remove({ _id: { $in: club.sporten } });
         return next(err);
       }

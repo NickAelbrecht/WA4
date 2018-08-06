@@ -1,7 +1,7 @@
 <div class="ui segment">
   <div *ngIf='errorMsg' class="ui error message">{{errorMsg}}</div>
   <form class="ui form" [formGroup]='club' (ngSubmit)='onSubmit()'>
-    <h4 class="ui dividing header">Voeg een club toe!</h4>
+    <h4 class="ui dividing header" id="headh4">Voeg een club toe!</h4>
     <div class="field">
       <label for='name_id'>naam:</label>
       <input type='text' id='name_id' formControlName='naam'>
@@ -20,11 +20,10 @@
     </div>
 
     <div class="field">
-
+      <label for="sport_naam">Sport:</label>
       <div formArrayName='sporten' *ngFor='let item of sporten.controls;   let i = index'>
         <!--club.get("sporten")-->
         <div [formGroupName]='i'>
-          <label for="sport_naam">Sport:</label>
           <div class="field">
             <input type="text" id="sport_naam" formControlName='sportnaam'>
           </div>
