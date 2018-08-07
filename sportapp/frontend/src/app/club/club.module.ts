@@ -15,6 +15,7 @@ import {
   httpInterceptorProviders,
   basehttpInterceptorProviders
 } from "../http-interceptors";
+import { ClubFilter2Pipe } from "./club-filter2.pipe";
 
 const routes = [
   { path: "list", component: ClubListComponent },
@@ -39,7 +40,8 @@ const routes = [
     AddClubComponent,
     ClubFilterPipe,
     ClubListComponent,
-    ClubDetailComponent
+    ClubDetailComponent,
+    ClubFilter2Pipe
   ],
   providers: [
     basehttpInterceptorProviders,

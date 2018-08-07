@@ -1,6 +1,4 @@
-import { ClubDataService } from "./club/club-data.service";
 import { Component, OnInit } from "@angular/core";
-import { Club } from "./club/club.model";
 import { Observable } from "rxjs/Observable";
 import { AuthenticationService } from "./user/authentication.service";
 

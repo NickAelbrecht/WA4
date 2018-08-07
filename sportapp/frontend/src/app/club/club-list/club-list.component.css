@@ -4,3 +4,8 @@
 .ui.icon.button{
   float: right
 }
+
+ui.three.stackable.cards{
+  padding: 3%;
+  margin: 3%
+}

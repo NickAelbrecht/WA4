@@ -15,13 +15,6 @@ export class ClubFilterPipe implements PipeTransform {
         ) {
           return false;
         }
-        if (
-          locatie &&
-          club.locatie.toLowerCase().indexOf(locatie.toLowerCase()) === -1
-        ) {
-          return false;
-        }
-
         return true;
       });
     } else {

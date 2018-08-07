@@ -7,9 +7,13 @@
 }
 .ui.icon.button{    
     margin-top: 45%;
+    float: right;
+    margin-right: 5%;
+    background-color:tomato;
    
 }
 .ui.list{
-    float: right;
-    margin-right: 5%
+    float: left;
+    margin-left: 15%
 }
+

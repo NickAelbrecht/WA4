@@ -1,5 +1,5 @@
 import { Club } from "../club.model";
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   FormGroup,
   FormControl,
@@ -11,6 +11,7 @@ import { Sport } from "../sport/sport.model";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { ClubDataService } from "../club-data.service";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Router } from "../../../../node_modules/@angular/router";
 
 @Component({
   selector: "app-add-club",
@@ -18,12 +19,15 @@ import { HttpErrorResponse } from "@angular/common/http";
   styleUrls: ["./add-club.component.css"]
 })
 export class AddClubComponent implements OnInit {
+  //@ViewChild("popup1") popup1: Popup;
+
   public club: FormGroup;
   public errorMsg: string;
 
   constructor(
     private fb: FormBuilder,
-    private _clubDataService: ClubDataService
+    private _clubDataService: ClubDataService,
+    private router: Router
   ) {}
 
   get sporten(): FormArray {
@@ -54,6 +58,7 @@ export class AddClubComponent implements OnInit {
         }
       });
   }
+
   createSporten(): FormGroup {
     return this.fb.group({
       sportnaam: [""]
@@ -70,21 +75,14 @@ export class AddClubComponent implements OnInit {
       if (sport.sportnaam.length > 2) {
         const sport1 = new Sport(sport.sportnaam);
         club.addSport(sport1);
-       // console.log(sport1);
+        // console.log(sport1);
       }
     }
-    /* this._clubDataService.addNewClub(club).subscribe(
-      () => {},
-      (error: HttpErrorResponse) => {
-        this.errorMsg = `Error ${error.status} bij het toevoegen van een club ${
-          club.naam
-        }: ${error.error}`;
-      }
-    );*/
     if (club.naam.length < 1) {
       this.errorMsg = "De clubnaam mag niet leeg zijn!";
     } else if (club.sporten.length < 1) {
       this.errorMsg = "Een club moet minstens 1 sport bevatten!";
+      this.club.reset();
     } else {
       this._clubDataService.addNewClub(club).subscribe(
         () => {},
@@ -95,5 +93,28 @@ export class AddClubComponent implements OnInit {
         }
       );
     }
+    if (this.club.valid) {
+      this.club.reset();
+      setTimeout(() => {
+        this.router.navigate(["/club/list"]);
+      }, 1000);
+    }
   }
+
+  /*  ClickButton() {
+    this.popup1.options = {
+      header: "Voltooid",
+      color: "green", // red, blue....
+      widthProsentage: 40, // The with of the popou measured by browser width
+      animationDuration: 1, // in seconds, 0 = no animation
+      showButtons: true, // You can hide this in case you want to use custom buttons
+      confirmBtnContent: "OK", // The text on your confirm button
+      cancleBtnContent: "Cancel", // the text on your cancel button
+      confirmBtnClass: "btn btn-default", // your class for styling the confirm button
+      cancleBtnClass: "btn btn-default", // you class for styling the cancel button
+      animation: "fadeInDown" // 'fadeInLeft', 'fadeInRight', 'fadeInUp', 'bounceIn','bounceInDown'
+    };
+
+    this.popup1.show();
+  }*/
 }

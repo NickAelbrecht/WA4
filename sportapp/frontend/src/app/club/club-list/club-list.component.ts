@@ -14,6 +14,9 @@ export class ClubListComponent implements OnInit {
   public filterClubNaam: string;
   public filterClub$ = new Subject<string>();
 
+  public filterClubLocatie: string;
+  public filterClubLocatie$ = new Subject<string>();
+
   public errorMsg: string;
   private _clubs: Club[];
 
@@ -25,6 +28,14 @@ export class ClubListComponent implements OnInit {
         map(val => val.toLowerCase())
       )
       .subscribe(val => (this.filterClubNaam = val));
+
+    this.filterClubLocatie$
+      .pipe(
+        distinctUntilChanged(),
+        debounceTime(400),
+        map(val => val.toLowerCase())
+      )
+      .subscribe(val => (this.filterClubLocatie = val));
   }
 
   ngOnInit() {
@@ -36,6 +47,7 @@ export class ClubListComponent implements OnInit {
         }`;
       }
     );
+    this._clubs.sort((a: Club, b: Club) => a.naam.localeCompare(b.naam));
   }
 
   get clubs() {
