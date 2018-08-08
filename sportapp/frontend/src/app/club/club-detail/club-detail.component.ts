@@ -21,6 +21,20 @@ export class ClubDetailComponent implements OnInit {
   get club(): Club {
     return this._club;
   }
+
+  get prijs(){
+    if(this._club.prijs===null){
+      return 0;
+    }
+    return this._club.prijs;
+  }
+
+  get locatie(){
+    if(this._club.locatie===null||!this._club.locatie){
+      return "Geen locatie ingevuld.";
+    }
+    return this._club.locatie;
+  }
   ngOnInit() {
     this.route.data.subscribe(
       item => (this._club = item["club"]),

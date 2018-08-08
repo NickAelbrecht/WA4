@@ -10,20 +10,21 @@ import { SelectivePreloadStrategy } from "./SelectivePreloadStrategy";
 ];*/
 const appRoutes: Routes = [
   {
-    path: 'club',
+    path: "club",
     canActivate: [AuthGuardService],
-    loadChildren: 'app/club/club.module#ClubModule',
+    loadChildren: "app/club/club.module#ClubModule",
     data: { preload: true }
   },
-  { path: '', redirectTo: 'club/list', pathMatch: 'full' },
-  { path: '**', component: PageNotFoundComponent }
+  { path: "", redirectTo: "club/list", pathMatch: "full" },
+  { path: "**", component: PageNotFoundComponent }
 ];
 
-
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes, {
-    preloadingStrategy: SelectivePreloadStrategy
-  })],
+  imports: [
+    RouterModule.forRoot(appRoutes, {
+      preloadingStrategy: SelectivePreloadStrategy
+    })
+  ],
   providers: [SelectivePreloadStrategy],
   declarations: [],
   exports: [RouterModule]

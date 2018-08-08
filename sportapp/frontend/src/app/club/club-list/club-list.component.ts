@@ -47,7 +47,7 @@ export class ClubListComponent implements OnInit {
         }`;
       }
     );
-    this._clubs.sort((a: Club, b: Club) => a.naam.localeCompare(b.naam));
+    //this._clubs.sort((a: Club, b: Club) => a.naam.localeCompare(b.naam));
   }
 
   get clubs() {

@@ -10,12 +10,16 @@ export class ClubComponent implements OnInit {
   @Input() public club: Club;
 
   @Output() public deleteClub = new EventEmitter<Club>();
-  
+
   constructor() {}
 
   ngOnInit() {}
 
   removeClub() {
-    this.deleteClub.emit(this.club);
+    if (
+      confirm("Ben je zeker dat je " + this.club.naam + " wil verwijderen?")
+    ) {
+      this.deleteClub.emit(this.club);
+    }
   }
 }
