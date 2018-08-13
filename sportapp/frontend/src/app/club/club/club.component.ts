@@ -17,7 +17,7 @@ export class ClubComponent implements OnInit {
 
   removeClub() {
     if (
-      confirm("Ben je zeker dat je " + this.club.naam + " wil verwijderen?")
+      confirm("Ben je zeker dat je '" + this.club.naam + "' wil verwijderen?")
     ) {
       this.deleteClub.emit(this.club);
     }
