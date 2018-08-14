@@ -15,7 +15,7 @@ const appRoutes: Routes = [
     loadChildren: "app/club/club.module#ClubModule",
     data: { preload: true }
   },
-  { path: "", redirectTo: "club/list", pathMatch: "full" },
+  { path: "", redirectTo: "club/home", pathMatch: "full" },
   { path: "**", component: PageNotFoundComponent }
 ];
 
