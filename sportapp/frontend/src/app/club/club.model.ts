@@ -37,9 +37,9 @@ export class Club {
   }
 
   addSport(sp: Sport) {
-    console.log(sp);
+   // console.log(sp);
     this._sporten.push(sp);
-    console.log(this._sporten);
+    //console.log(this._sporten);
   }
 
   static fromJSON(json: any): Club {

@@ -1,9 +1,10 @@
 <div class="ui container">
   <div class="ui secondary pointing menu">
+      <a class='yellow item' routerLinkActive='active' routerLink="/club/home">Home</a>
     <a class='blue item' routerLinkActive='active' routerLink="/club/list">Clubs</a>
     <a class='green item' routerLinkActive='active' routerLink="/club/add">Club toevoegen</a>
     <a class='red item' routerLinkActive='active' routerLink="/club/info">Infopagina</a>
-    <a *ngIf='(currentUser | async) else loginlink' class="red right item" routerLinkActive='active' routerLink="/logout">{{currentUser|async}}/uitloggen</a>
+    <a *ngIf='(currentUser | async) else loginlink' class="red right item" routerLinkActive='active' routerLink="/logout">Gebruiker: {{currentUser|async}} | uitloggen</a>
     <ng-template #loginlink>
       <a class="green right item" routerLinkActive='active' routerLink="/login">log in</a>
     </ng-template>
@@ -13,7 +14,7 @@
   </div>
 </div>
 <div class="ui left inverted vertical footer segment">
-  <div class="ui center aligned container">
+  <div class="ui center aligned container footer">
     Nick Aelbrecht - Web4
   </div>
 </div>

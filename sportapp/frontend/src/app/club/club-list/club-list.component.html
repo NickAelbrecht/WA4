@@ -9,7 +9,7 @@
       <div class="ui input">
         <input (keyup)='filterClubLocatie$.next($event.target.value)' type='text' id='filter' name='filter' placeholder='Filter op locatie...'>
       </div>
-     <!--<div class="ui input">
+      <!--<div class="ui input">
         <input (keyup)='filterClubSport$.next($event.target.value)' type='text' id='filter' name='filter' placeholder='Filter op sport...'>
       </div>-->
     </div>
@@ -20,8 +20,9 @@
   </div>
   <div class="ui basic segment">
     <div class="ui three stackable cards">
-      <app-club *ngFor='let localClub of clubs | clubFilter:filterClubNaam | clubFilter2:filterClubLocatie | clubFilter3:filterClubSport'
+      <app-club *ngFor='let localClub of clubs | clubFilter:filterClubNaam | clubFilter2:filterClubLocatie |clubFilter3:filterClubSport| clubSorteer'
         [club]='localClub' (deleteClub)='removeClub($event)'></app-club>
     </div>
   </div>
 </div>
+<!--clubFilter3:filterClubSport-->
