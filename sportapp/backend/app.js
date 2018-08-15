@@ -1,30 +1,27 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-let passport = require('passport');
-
-
+var express = require("express");
+var path = require("path");
+var favicon = require("serve-favicon");
+var logger = require("morgan");
+var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+let passport = require("passport");
 
 mongoose.connect("mongodb://localhost/clubdb");
 
 require("./models/Club");
 require("./models/Sport");
 require("./models/User");
-require("./models/Rating")
+require("./models/Rating");
 
+require("./config/passport");
 
-require('./config/passport');
-
-var index = require("./routes/index");  
+var index = require("./routes/index");
 var users = require("./routes/users");
 let cors = require("cors");
 
 var app = express();
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: "*" }));
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
@@ -36,7 +33,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(passport.initialize());
 
 app.use("/", index);
-app.use("/API/users", users);///API
+app.use("/API/users", users); ///API
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -55,23 +52,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.json(err.message);
 });
-
-/*router.get("/API/club/", function(req, res, next) {
-  res.send("process the request here");
-});
-
-passport.use(new LocalStrategy(
-  function (username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
-          if (err) { return done(err); }
-          if (!user) {
-              return done(null, false, { message: 'Incorrect username.' });
-          }
-          if (!user.validPassword(password)) {
-              return done(null, false, { message: 'Incorrect password.' });
-          }
-          return done(null, user);
-      });
-  }));*/
 
 module.exports = app;

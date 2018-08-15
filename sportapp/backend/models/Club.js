@@ -11,8 +11,7 @@ var ClubSchema = new mongoose.Schema({
   ratings: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Rating",
-      //default: 0
+      ref: "Rating"
     }
   ],
   prijs: { type: Number, default: 0 },

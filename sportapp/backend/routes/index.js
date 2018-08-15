@@ -33,7 +33,8 @@ router.post("/API/clubs/", function(req, res, next) {
     let club = new Club({
       naam: req.body.naam,
       prijs: req.body.prijs,
-      locatie: req.body.locatie
+      locatie: req.body.locatie,
+     // ratings :req.body.ratings
     });
     club.sporten = sp;
     club.save(function(err, rec) {
@@ -48,7 +49,6 @@ router.post("/API/clubs/", function(req, res, next) {
 });
 
 router.post("/API/club/:club/sporten", function(req, res, next) {
-  //auth,
   let sp = new Sport(req.body);
 
   sp.save(function(err, sport) {
@@ -62,8 +62,9 @@ router.post("/API/club/:club/sporten", function(req, res, next) {
   });
 });
 
-router.post("/API/club/:club/rating", function(req, res, next) {
+router.post("/API/club/:club/ratings", function(req, res, next) {
   let rating = new Rating(req.body);
+
   rating.save(function(err, rate) {
     if (err) return next(err);
     req.club.ratings.push(rate);

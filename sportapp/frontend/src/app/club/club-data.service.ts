@@ -24,7 +24,7 @@ export class ClubDataService {
     return this.http
       .post(`${this._appUrl}/clubs/`, club)
       .pipe(map(Club.fromJSON));
-    // .pipe(map((item: any): Club => new Club(item.naam)));
+  
   }
 
   removeClub(cl: Club): Observable<Club> {
@@ -44,7 +44,7 @@ export class ClubDataService {
   }
 
   addRatingToClub(rate: Rating, cl: Club): Observable<Rating> {
-    const theUrl = `${this._appUrl}/club/${cl.id}/rating`;
+    const theUrl = `${this._appUrl}/club/${cl.id}/ratings`;
     return this.http.post(theUrl, rate).pipe(map(Rating.fromJSON));
   }
 }
