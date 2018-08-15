@@ -24,16 +24,21 @@ router.get("/API/clubs/", function(req, res, next) {
   });
 });
 
-router.post("/API/clubs/",  function(req, res, next) { //auth,
+router.post("/API/clubs/", function(req, res, next) {
+  //auth,
   Sport.create(req.body.sporten, function(err, sp) {
     if (err) {
       return next(err);
     }
-    let club = new Club({ naam: req.body.naam, prijs:req.body.prijs,locatie:req.body.locatie });
+    let club = new Club({
+      naam: req.body.naam,
+      prijs: req.body.prijs,
+      locatie: req.body.locatie
+    });
     club.sporten = sp;
     club.save(function(err, rec) {
       if (err) {
-        console.log("error!!!")
+        console.log("error!!!");
         Sport.remove({ _id: { $in: club.sporten } });
         return next(err);
       }
@@ -42,7 +47,8 @@ router.post("/API/clubs/",  function(req, res, next) { //auth,
   });
 });
 
-router.post("/API/club/:club/sporten", function(req, res, next) { //auth,
+router.post("/API/club/:club/sporten", function(req, res, next) {
+  //auth,
   let sp = new Sport(req.body);
 
   sp.save(function(err, sport) {
@@ -52,6 +58,18 @@ router.post("/API/club/:club/sporten", function(req, res, next) { //auth,
     req.club.save(function(err, rec) {
       if (err) return next(err);
       res.json(sport);
+    });
+  });
+});
+
+router.post("/API/club/:club/rating", function(req, res, next) {
+  let rating = new Rating(req.body);
+  rating.save(function(err, rate) {
+    if (err) return next(err);
+    req.club.ratings.push(rate);
+    req.club.save(function(err, rec) {
+      if (err) return next(err);
+      res.json(rate);
     });
   });
 });
@@ -74,7 +92,8 @@ router.param("club", function(req, res, next, id) {
   });
 });
 
-router.delete("/API/club/:club", function(req, res, next) {  //auth,
+router.delete("/API/club/:club", function(req, res, next) {
+  //auth,
   Sport.remove({ _id: { $in: req.club.sporten } }, function(err) {
     if (err) return next(err);
     req.club.remove(function(err) {

@@ -17,6 +17,16 @@
       Locatie van de club:
     </h4>
     <span class="text">{{locatie}}</span>
+    <h4 class="ui sub header">
+      Rating van de club:
+      <br>
+      <a *ngFor="let item of ratingLijst; let i=index " (click)="setStar(i)">
+        <i class="star outline icon"></i>
+      </a>
+      <br>
+      <button class="ui positive button" (click)="addRating()">Geef je rating</button>
+      <br> Gemiddelde rating: {{gemiddeldeRating}} <!---->
+    </h4>
   </div>
-</div>
 
+</div>

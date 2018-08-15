@@ -8,6 +8,13 @@ var ClubSchema = new mongoose.Schema({
       ref: "Sport"
     }
   ],
+  ratings: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Rating",
+      //default: 0
+    }
+  ],
   prijs: { type: Number, default: 0 },
   locatie: { type: String, default: "Geen locatie opgegeven" }
 });

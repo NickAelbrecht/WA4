@@ -1,4 +1,5 @@
 import { Sport } from "./sport/sport.model";
+import { Rating } from "./rating/rating.model";
 
 export class Club {
   private _naam: string;
@@ -6,10 +7,13 @@ export class Club {
   private _prijs: number;
   private _sporten: Sport[];
   private _id: string;
+  private _ratings: Rating[];
 
-  constructor(naam: string, sporten: Sport[] = []) {
+  constructor(naam: string, sporten: Sport[] = [], ratings?: Rating[]) {
     this._naam = naam;
     this._sporten = sporten; //|| new Array();
+    this._ratings = ratings || new Array();
+    //console.log(this._ratings); --> lege array
   }
 
   get naam(): string {
@@ -36,10 +40,26 @@ export class Club {
     this._sporten = sporten;
   }
 
+  get ratings(): Rating[] {
+    return this._ratings;
+  }
+
+  addRating(rating: Rating) {
+    //console.log(rating);
+    this._ratings.push(rating);
+  }
+
+  gemiddeldeRating(): number {
+    let gemiddelde = 0;
+    this._ratings.forEach(rate => (gemiddelde += rate.rating));
+    if (gemiddelde != 0) {
+      gemiddelde = gemiddelde / this._ratings.length;
+    }
+    return gemiddelde;
+  }
+
   addSport(sp: Sport) {
-   // console.log(sp);
     this._sporten.push(sp);
-    //console.log(this._sporten);
   }
 
   static fromJSON(json: any): Club {
@@ -47,6 +67,7 @@ export class Club {
     cl._id = json._id;
     cl._locatie = json.locatie;
     cl._prijs = json.prijs;
+    cl._ratings = json.ratings;
 
     return cl;
   }
@@ -57,7 +78,8 @@ export class Club {
       naam: this._naam,
       sporten: this._sporten.map(sp => sp.toJSON()),
       prijs: this._prijs,
-      locatie: this._locatie
+      locatie: this._locatie,
+      ratings: this._ratings
     };
   }
 

@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppComponent } from "./app.component";
 import { PageNotFoundComponent } from "./page-not-found/page-not-found.component";
 import { AppRoutingModule } from "./app-routing/app-routing.module";
+import { RatingModule } from "../../node_modules/ngx-rating";
 
 @NgModule({
   declarations: [AppComponent, PageNotFoundComponent],
@@ -15,6 +16,7 @@ import { AppRoutingModule } from "./app-routing/app-routing.module";
     UserModule,
     AppRoutingModule,
     HttpClientModule,
+    RatingModule,
     ReactiveFormsModule
   ],
   providers: [],

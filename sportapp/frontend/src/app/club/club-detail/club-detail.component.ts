@@ -1,8 +1,9 @@
+import { AuthenticationService } from "./../../user/authentication.service";
 import { Club } from "./../club.model";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ClubDataService } from "../club-data.service";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Rating } from "../rating/rating.model";
 
 @Component({
   selector: "app-club-detail",
@@ -13,28 +14,67 @@ export class ClubDetailComponent implements OnInit {
   private _club: Club;
   errorMsg: string;
 
+  ratingLijst: boolean[] = [true, true, true, true, true];
+  public rating: number;
+
   constructor(
     private route: ActivatedRoute,
-    private clubDataService: ClubDataService
+    private authService: AuthenticationService
   ) {}
 
   get club(): Club {
     return this._club;
   }
+  get gemiddeldeRating(): number {
+    return this._club.gemiddeldeRating();
+  }
 
-  get prijs(){
-    if(this._club.prijs===null){
+  get prijs() {
+    if (this._club.prijs === null) {
       return 0;
     }
     return this._club.prijs;
   }
 
-  get locatie(){
-    if(this._club.locatie===null||!this._club.locatie){
+  get locatie() {
+    if (this._club.locatie === null || !this._club.locatie) {
       return "Geen locatie ingevuld.";
     }
     return this._club.locatie;
   }
+
+  setStar(data: any) {
+    this.rating = data + 1;
+    for (var i = 0; i <= 4; i++) {
+      if (i <= data) {
+        this.ratingLijst[i] = false;
+      } else {
+        this.ratingLijst[i] = true;
+      }
+    }
+  }
+
+  addRating() {
+    if (this.hasNotVoted(this.authService.user$.value)) {
+      let rating = new Rating(this.rating);
+      rating.reviewer = this.authService.user$.value;
+      this._club.addRating(rating);
+      console.log("addrating: " + this.rating);
+    } else {
+      console.log(this.authService.user$.value + " has already voted!");
+    }
+  }
+
+  hasNotVoted(naam: string): boolean {
+    let flag: boolean = true;
+    this._club.ratings.forEach(rating => {
+      if (rating.reviewer == naam) {
+        flag = false;
+      }
+    });
+    return flag;
+  }
+
   ngOnInit() {
     this.route.data.subscribe(
       item => (this._club = item["club"]),

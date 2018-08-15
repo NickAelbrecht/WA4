@@ -16,10 +16,11 @@ import {
   basehttpInterceptorProviders
 } from "../http-interceptors";
 import { ClubFilter2Pipe } from "./club-filter2.pipe";
-import { ClubFilter3Pipe } from './club-filter3.pipe';
-import { InfopaginaComponent } from './infopagina/infopagina.component';
-import { HomepaginaComponent } from './homepagina/homepagina.component';
-import { ClubSorteerPipe } from './club-sorteer.pipe';
+import { ClubFilter3Pipe } from "./club-filter3.pipe";
+import { InfopaginaComponent } from "./infopagina/infopagina.component";
+import { HomepaginaComponent } from "./homepagina/homepagina.component";
+import { ClubSorteerPipe } from "./club-sorteer.pipe";
+import { RatingComponent } from './rating/rating.component';
 
 const routes = [
   { path: "list", component: ClubListComponent },
@@ -51,7 +52,8 @@ const routes = [
     ClubFilter3Pipe,
     InfopaginaComponent,
     HomepaginaComponent,
-    ClubSorteerPipe
+    ClubSorteerPipe,
+    RatingComponent
   ],
   providers: [
     basehttpInterceptorProviders,

@@ -1,8 +1,7 @@
-import { Component, OnInit, Inject } from "@angular/core";
+import { Component } from "@angular/core";
 import { Observable } from "rxjs/Observable";
 import { AuthenticationService } from "./user/authentication.service";
 import { Title } from "../../node_modules/@angular/platform-browser";
-import { DOCUMENT } from "@angular/platform-browser";
 
 @Component({
   selector: "app-root",
