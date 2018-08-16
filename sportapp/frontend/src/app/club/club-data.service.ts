@@ -45,6 +45,7 @@ export class ClubDataService {
 
   addRatingToClub(rate: Rating, cl: Club): Observable<Rating> {
     const theUrl = `${this._appUrl}/club/${cl.id}/ratings`;
-    return this.http.post(theUrl, rate).pipe(map(Rating.fromJSON));
+    console.log(map(Rating.fromJSON));
+    return this.http.put(theUrl, rate).pipe(map(Rating.fromJSON));
   }
 }
