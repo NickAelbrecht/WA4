@@ -45,16 +45,15 @@ export class Club {
   }
 
   addRating(rating: Rating) {
-    //console.log(rating);
     this._ratings.push(rating);
   }
 
   gemiddeldeRating(): number {
     let gemiddelde = 0;
+    console.log(this._ratings);
+    console.log(this._ratings.length);
     this._ratings.forEach(rate => (gemiddelde += rate.rating));
-    if (gemiddelde != 0) {
-      gemiddelde = gemiddelde / this._ratings.length;
-    }
+    gemiddelde = gemiddelde / this._ratings.length;
     return gemiddelde;
   }
 
@@ -63,7 +62,7 @@ export class Club {
   }
 
   static fromJSON(json: any): Club {
-    const cl = new Club(json.naam, json.sporten.map(Sport.fromJSON));
+    const cl = new Club(json.naam, json.sporten); //.map(Sport.fromJSON));
     cl._id = json._id;
     cl._locatie = json.locatie;
     cl._prijs = json.prijs;
@@ -76,7 +75,7 @@ export class Club {
     return {
       _id: this._id,
       naam: this._naam,
-      sporten: this._sporten.map(sp => sp.toJSON()),
+      sporten: this._sporten, //.map(sp => sp.toJSON()),
       prijs: this._prijs,
       locatie: this._locatie,
       ratings: this._ratings

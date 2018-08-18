@@ -16,7 +16,7 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/API/clubs/", function(req, res, next) {
-  let query = Club.find().populate("sporten");
+  let query = Club.find().populate("sporten").populate("ratings");
   query.exec(function(err, clubs) {
     if (err) {
       return next(err);
@@ -63,6 +63,7 @@ router.post("/API/club/:club/sporten", function(req, res, next) {
 });
 
 router.post("/API/club/:club/ratings", function(req, res, next) {
+  
    let rating = new Rating(req.body);
 
   rating.save(function(err, rate) {
@@ -72,7 +73,7 @@ router.post("/API/club/:club/ratings", function(req, res, next) {
     req.club.save(function(err) {
       if (err) return next(err);
 
-      res.json(rate);//req.club);
+      res.json(req.club);//req.club);
     });
   });
 });
@@ -82,7 +83,7 @@ router.get("/API/club/:club", function(req, res, next) {
 });
 
 router.param("club", function(req, res, next, id) {
-  let query = Club.findById(id).populate("sporten");
+  let query = Club.findById(id).populate("sporten").populate("ratings");
   query.exec(function(err, club) {
     if (err) {
       return next(err);

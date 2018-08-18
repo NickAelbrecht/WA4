@@ -13,8 +13,8 @@ export class Rating {
   toJSON() {
     return {
       _id: this._id,
-      _rating: this._rating,
-      _user: this._user
+      rating: this._rating,
+      user: this._user
     };
   }
 

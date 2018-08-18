@@ -5,7 +5,7 @@ import { Club } from "./club.model";
   name: "clubSorteer"
 })
 export class ClubSorteerPipe implements PipeTransform {
-  transform(clubs: Club[], args?: any): Club[] {
+  transform(clubs: Club[]): Club[] {
     clubs.sort((a: Club, b: Club) => {
       if (a.naam.toLowerCase() < b.naam.toLowerCase()) {
         return -1;
