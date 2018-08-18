@@ -4,6 +4,7 @@ var router = express.Router();
 let mongoose = require("mongoose");
 let Club = mongoose.model("Club");
 let Sport = mongoose.model("Sport");
+let Rating =mongoose.model("Rating");
 
 let jwt = require("express-jwt");
 
@@ -61,7 +62,7 @@ router.post("/API/club/:club/sporten", function(req, res, next) {
   });
 });
 
-router.put("/API/club/:club/ratings", function(req, res, next) {
+router.post("/API/club/:club/ratings", function(req, res, next) {
    let rating = new Rating(req.body);
 
   rating.save(function(err, rate) {

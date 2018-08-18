@@ -4,6 +4,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Rating } from "../rating/rating.model";
+import { ClubDataService } from "../club-data.service";
 
 @Component({
   selector: "app-club-detail",
@@ -19,7 +20,8 @@ export class ClubDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthenticationService
+    private authService: AuthenticationService,
+    private clubDataService: ClubDataService
   ) {}
 
   get club(): Club {
@@ -57,18 +59,17 @@ export class ClubDetailComponent implements OnInit {
   addRating() {
     if (this.hasNotVoted(this.authService.user$.value)) {
       let rating = new Rating(this.rating);
-      rating.reviewer = this.authService.user$.value;
-      this._club.addRating(rating);
-      console.log("addrating: " + this.rating);
-    } else {
-      console.log(this.authService.user$.value + " has already voted!");
+      rating.user = this.authService.user$.value;
+      this.clubDataService
+        .addRatingToClub(rating, this._club)
+        .subscribe(cl => (this._club = cl));
     }
   }
 
   hasNotVoted(naam: string): boolean {
     let flag: boolean = true;
     this._club.ratings.forEach(rating => {
-      if (rating.reviewer == naam) {
+      if (rating.user == naam) {
         flag = false;
       }
     });

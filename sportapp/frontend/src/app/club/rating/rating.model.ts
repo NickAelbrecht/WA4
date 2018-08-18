@@ -1,12 +1,12 @@
 export class Rating {
   private _id: string;
   private _rating: number;
-  private _reviewer: string;
+  private _user: string;
 
   static fromJSON(json): Rating {
     const rating = new Rating(json.rating);
     rating._id = json._id;
-    rating._reviewer = json._reviewer;
+    rating._user = json._user;
     return rating;
   }
 
@@ -14,7 +14,7 @@ export class Rating {
     return {
       _id: this._id,
       _rating: this._rating,
-      _reviewer: this._reviewer
+      _user: this._user
     };
   }
 
@@ -29,10 +29,10 @@ export class Rating {
   get rating(): number {
     return this._rating;
   }
-  get reviewer(): string {
-    return this._reviewer;
+  get user(): string {
+    return this._user;
   }
-  set reviewer(review: string) {
-    this._reviewer = review;
+  set user(user: string) {
+    this._user = user;
   }
 }

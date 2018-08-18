@@ -1,4 +1,4 @@
-import { Rating } from './rating/rating.model';
+import { Rating } from "./rating/rating.model";
 import { Injectable } from "@angular/core";
 import { Club } from "./club.model";
 import { HttpClient } from "@angular/common/http";
@@ -24,7 +24,6 @@ export class ClubDataService {
     return this.http
       .post(`${this._appUrl}/clubs/`, club)
       .pipe(map(Club.fromJSON));
-  
   }
 
   removeClub(cl: Club): Observable<Club> {
@@ -39,13 +38,11 @@ export class ClubDataService {
   }
 
   getClub(id: string): Observable<Club> {
-    return this.http
-    .get(`${this._appUrl}/club/${id}`).pipe(map(Club.fromJSON));
+    return this.http.get(`${this._appUrl}/club/${id}`).pipe(map(Club.fromJSON));
   }
 
-  addRatingToClub(rate: Rating, cl: Club): Observable<Rating> {
+  addRatingToClub(rate: Rating, cl: Club): Observable<Club> {
     const theUrl = `${this._appUrl}/club/${cl.id}/ratings`;
-    console.log(map(Rating.fromJSON));
-    return this.http.put(theUrl, rate).pipe(map(Rating.fromJSON));
+    return this.http.post(theUrl, rate).pipe(map(Club.fromJSON));
   }
 }
