@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 let passport = require("passport");
 
-mongoose.connect("mongodb://localhost/clubdb");
+mongoose.connect(process.env.RECIPE_DATABASE);//"mongodb://localhost/clubdb");
 
 require("./models/Club");
 require("./models/Sport");
