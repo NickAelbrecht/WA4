@@ -15,7 +15,7 @@ router.get("/", function(req, res, next) {
   res.send("server works");
 });
 
-router.get("/API/clubs/", function(req, res, next) {
+router.get("/API/clubs/", auth,function(req, res, next) {
   let query = Club.find().populate("sporten").populate("ratings");
   query.exec(function(err, clubs) {
     if (err) {
@@ -25,7 +25,7 @@ router.get("/API/clubs/", function(req, res, next) {
   });
 });
 
-router.post("/API/clubs/", function(req, res, next) {
+router.post("/API/clubs/",auth, function(req, res, next) {
   //auth,
   Sport.create(req.body.sporten, function(err, sp) {
     if (err) {
@@ -48,7 +48,7 @@ router.post("/API/clubs/", function(req, res, next) {
   });
 });
 
-router.post("/API/club/:club/sporten", function(req, res, next) {
+router.post("/API/club/:club/sporten",auth, function(req, res, next) {
   let sp = new Sport(req.body);
 
   sp.save(function(err, sport) {
@@ -78,7 +78,7 @@ router.post("/API/club/:club/ratings", function(req, res, next) {
   });
 });
 
-router.get("/API/club/:club", function(req, res, next) {
+router.get("/API/club/:club",auth, function(req, res, next) {
   res.json(req.club);
 });
 
@@ -96,7 +96,7 @@ router.param("club", function(req, res, next, id) {
   });
 });
 
-router.delete("/API/club/:club", function(req, res, next) {
+router.delete("/API/club/:club",auth, function(req, res, next) {
   //auth,
   Sport.remove({ _id: { $in: req.club.sporten } }, function(err) {
     if (err) return next(err);
